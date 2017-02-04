@@ -19,4 +19,13 @@ class Site extends CI_Controller
         $this->load->view('home', $data);
         $this->load->view('templates/footer');
     }
+    
+    public function new_avatar()
+    {       
+        $data=[];
+        $data['avatars']=$this->avatar->get_avatars(1);
+        $this->load->view('templates/header');
+        $this->load->view('new-avatar', $data);
+        $this->load->view('templates/footer');
+    }
 }
