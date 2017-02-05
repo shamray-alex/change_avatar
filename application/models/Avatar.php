@@ -7,11 +7,14 @@ class Avatar extends CI_Model
         $this->load->database();
     }
 
-    public function get_avatars($ids)
+     public function getAll()
     {
-        $query = $this->db->get_where('avatar', array('id' => $ids));
-        return $query->result_array();
-
+        $query = $this->db->get('avatar');
+        return $query->result();
+    }
+    public function createAvatar(){
+        $this->db->insert('avatar', ['updated_at'=>time()]);
+        return $this->db->insert_id();
     }
 
 }

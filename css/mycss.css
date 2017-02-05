@@ -55,3 +55,10 @@
     width: 700px;
     height: 700px;
 }
+.tab-pane{
+    padding: 20px;
+}
+
+.avatar-question{
+    height: 100px;
+}
