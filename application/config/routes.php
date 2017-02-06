@@ -51,7 +51,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'avatar_controller';
 $route['404_override'] = '';
-$route['translate_uri_dashes'] = TRUE;
+$route['translate_uri_dashes'] = FALSE;
 
 $route['create-avatar'] = 'avatar_controller/create_avatar';
 $route['my-avatars'] = 'avatar_controller/index';
+$route['edit-avatar/(:num)'] = 'avatar_controller/update_avatar_answers/$1';
