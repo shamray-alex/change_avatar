@@ -53,7 +53,8 @@
     outline: 1px solid #e8e8e8;
     margin-left: 100px;
     width: 700px;
-    height: 700px;
+    height:auto;
+    min-height: 500px;
 }
 .tab-pane{
     padding: 20px;

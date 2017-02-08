@@ -5,71 +5,56 @@
             <div class="col-md-6">
                 <div class="tabbable tabs-left">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#a" data-toggle="tab">STEP 1</a></li>
-                        <li><a href="#b" data-toggle="tab">STEP 2</a></li>
-                        <li><a href="#c" data-toggle="tab">STEP 3</a></li>
+                        <?php $active = 'class="active"';
+                        for ($i = 0; $i < count($avatar_questions); $i++) {
+                            echo '<li ' . $active . '><a href="#step' . ($i + 1) . '" data-toggle="tab">STEP ' . ($i + 1) . '</a></li>';//
+                            $active = '';
+                        } ?>
                     </ul>
                     <?php
-                    $link = $pageType == 'create' ? 'create-avatar' : 'edit-avatar/'.$avatarId;
+                    $link = $pageType == 'create' ? 'create-avatar' : 'edit-avatar/' . $avatar->id;
                     echo form_open($link) ?>
+
                     <div class="tab-content">
-                        <div class="tab-pane active" id="a">
-                            <?php for ($i = 0; $i < count($avatar_questions); $i++) { ?>
+
+
+                        <?php $active = ' active';
+                        for ($i = 0; $i < count($avatar_questions); $i++) { ?>
+                            <div class="tab-pane<?= $active ?>" id="step<?= ($i + 1) ?>">
                                 <div class="avatar-question">
-                                    <?php
+                                    <?php $active = '';
                                     $id = 'question_id_' . $avatar_questions[$i]->id;
                                     echo form_label($avatar_questions[$i]->question, $id, ['style' => 'display:block;']);
-                                    if ($avatar_questions[$i]->defined_answers) {
-                                        $defined_answers = json_decode($avatar_questions[$i]->defined_answers, true);
-                                        if ($avatar_questions[$i]->question == "Gender") {
-                                            for ($j = 0; $j < count($defined_answers); $j++) {
-                                                $checked='';
-                                                if(isset($avatar_questions[$i]->answer) && $defined_answers[$j]==$avatar_questions[$i]->answer){
-                                                    $checked='checked="checked"';
-                                                }?>
-                                                <label class="radio-inline" style="margin:10px 10px 10px 0;">
-                                                    <?= '<input value="' . $defined_answers[$j] . '" type="radio" name="' . $id . '" '.$checked.'>' . $defined_answers[$j] ?>
-                                                </label>
-                                            <?php }
-                                        } else {
-                                            ?>
-                                            <div class="form-group">
-                                                <select class="form-control" id="<?= $id ?>" name="<?= $id ?>">
-                                                    <?php
-                                                    for ($j = 0; $j < count($defined_answers); $j++) {
-                                                        $selected='';
-                                                        if(isset($avatar_questions[$i]->answer) && $defined_answers[$j]==$avatar_questions[$i]->answer){
-                                                            $selected='selected="selected"';
-                                                        }
-                                                        echo '<option '.$selected.'>' . $defined_answers[$j] . '</option>';
+                                    if (isset($avatar_questions[$i]->predefined_answers)) {
+                                        $predefined_answers = $avatar_questions[$i]->predefined_answers; ?>
+                                        <div class="form-group">
+                                            <select class="form-control" id="<?= $id ?>" name="<?= $id ?>">
+                                                <?php foreach ($predefined_answers as $value) {
+                                                    $selected = '';
+                                                    if (isset($avatar) && $value == $avatar->answer_object[$avatar_questions[$i]->id]) {
+                                                        $selected = 'selected="selected"';
                                                     }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                            <?php
-                                        }
-                                    } else {
-                                        echo form_input([
+                                                    echo '<option ' . $selected . '>' . $value . '</option>';
+                                                } ?>
+                                            </select>
+                                        </div>
+                                    <?php } else {
+                                        $data = [
                                             'name' => $id,
                                             'id' => $id,
-                                            'value' => isset($avatar_questions[$i]->answer) ? $avatar_questions[$i]->answer : '',
+                                            'value' => isset($avatar->answer_object[$avatar_questions[$i]->id]) ? $avatar->answer_object[$avatar_questions[$i]->id] : '',
                                             'class' => 'form-control',
-                                            'size' => '100',
-//                                            'required' => 'required'
-                                        ]);
-                                    }
-                                    ?>
+                                            'size' => '100'
+                                        ];
+                                        if ($avatar_questions[$i]->id == 1) {
+                                            $data['required'] = 'required';
+                                        }
+                                        echo form_input($data);
+                                    } ?>
                                 </div>
-                            <?php } ?>
-                        </div>
-                        <div class="tab-pane" id="b">Secondo sed ac orci quis tortor imperdiet venenatis. Duis elementum
-                            auctor accumsan.
-                            Aliquam in felis sit amet augue.
-                        </div>
-                        <div class="tab-pane" id="c">Thirdamuno, ipsum dolor sit amet, consectetur adipiscing elit. Duis
-                            pharetra varius quam sit amet vulputate.
-                            Quisque mauris augue, molestie tincidunt condimentum vitae.
-                        </div>
+
+                            </div>
+                        <?php } ?>
                     </div>
                     <div class="pull-right container-fluid" style="padding: 10px;">
                         <button class="btn" id="nextButton" type="button" style="width: 100px;">Next</button>
@@ -82,3 +67,15 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $("#nextButton").click(function (e) {
+        var tabs=$('.nav-tabs li');
+        for(var i=0; i<tabs.length-1;i++){
+            if ($(tabs[i]).hasClass('active')){
+                $(tabs[i+1]).find('a').trigger('click');
+                break;
+            }
+        }
+    });
+</script>

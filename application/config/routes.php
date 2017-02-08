@@ -56,3 +56,6 @@ $route['translate_uri_dashes'] = FALSE;
 $route['create-avatar'] = 'avatar_controller/create_avatar';
 $route['my-avatars'] = 'avatar_controller/index';
 $route['edit-avatar/(:num)'] = 'avatar_controller/update_avatar_answers/$1';
+$route['delete-avatar/(:num)'] = 'avatar_controller/deleteAvatar/$1';
+$route['my-avatars'] = 'avatar_controller/index';
+$route['choose-template'] = 'template_controller/index';
