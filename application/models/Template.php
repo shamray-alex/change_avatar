@@ -13,10 +13,22 @@ class Template extends CI_Model
         return $query->result()[0];
     }
 
+//    public function getTemplateQuestions($id)
+//    {
+//        $query = $this->db->get_where('question', ['template_id' => $id]);
+//        return $query->result();
+//    }
+
     public function getAllTemplates()
     {
+        $this->load->model('template_headline');
+
         $query = $this->db->get('template');
-        return $query->result();
+        $result = $query->result();
+        foreach ($result as $res) {
+            $res->headlines = $this->template_headline->getHeadlines($res->id);
+        }
+        return $result;
     }
 
 }

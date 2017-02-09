@@ -7,7 +7,7 @@ class Question extends CI_Model
         $this->load->database();
     }
 
-    public function getQuestion($template_id=null)
+    public function getQuestions($template_id=null)
     {
         $query = $this->db->get_where('question', ['template_id' => $template_id]);
         $result = $query->result();

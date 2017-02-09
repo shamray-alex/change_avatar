@@ -53,9 +53,15 @@ $route['default_controller'] = 'avatar_controller';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+//AVATAR
 $route['create-avatar'] = 'avatar_controller/create_avatar';
 $route['my-avatars'] = 'avatar_controller/index';
 $route['edit-avatar/(:num)'] = 'avatar_controller/update_avatar_answers/$1';
 $route['delete-avatar/(:num)'] = 'avatar_controller/deleteAvatar/$1';
 $route['my-avatars'] = 'avatar_controller/index';
+
+//TEMPLATES
 $route['choose-template'] = 'template_controller/index';
+$route['template-questions/(:num)'] = 'template_controller/template_questions/$1';
+$route['preview-template/(:num)'] = 'template_controller/preview_template/$1';
+$route['edit-template/(:num)'] = 'template_controller/edit_template/$1';

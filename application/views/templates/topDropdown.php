@@ -10,7 +10,7 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">Change Avatar Profile
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <?php foreach ($avatars as $key => $avatar) {
+                    <?php foreach ($avatars as $avatar) {
                         $name = $avatar->answer_object[1]; ?>
                         <li><a href="#"><?= $name ?></a></li>
                     <?php } ?>
@@ -22,12 +22,3 @@
         </ul>
     </div>
 </nav>
-
-
-<!--<div class="container">-->
-<!--    <div class="dropdown pull-right">-->
-<!--        <button class="btn dropdown-toggle btn-default" type="button" data-toggle="dropdown">Change Avatar Profile-->
-<!--            <span class="caret"></span></button>-->
-<!---->
-<!--    </div>-->
-<!--</div>-->

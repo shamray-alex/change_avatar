@@ -11,6 +11,7 @@ class Avatar_controller extends CI_Controller
 
         $this->load->model('question');
         $this->load->model('avatar');
+        $this->load->model('answer');
 
         $this->load->helper('url_helper');
         $this->load->helper('form');
@@ -35,12 +36,14 @@ class Avatar_controller extends CI_Controller
                     $answers[$questionId] = $value;
                 }
             }
-            $newAvatarId = $this->avatar->createAvatar($answers);
+            $newAvatarId = $this->avatar->createAvatar();
+            $this->answer->createAnswer('avatar', $newAvatarId, $answers);
+
             redirect('/my-avatars');
         } else {
             $data = [];
             $data['pageType'] = 'create';
-            $data['avatar_questions'] = $this->question->getQuestion(null);
+            $data['avatar_questions'] = $this->question->getQuestions(null);
             $this->load->view('templates/header', ['title' => 'Create Avatar']);
             $this->load->view('templates/topDropdown', ['avatars' => $this->avatar->getAllAvatars()]);
             $this->load->view('new-avatar', $data);
@@ -62,7 +65,7 @@ class Avatar_controller extends CI_Controller
             redirect('/my-avatars');
         } else {
             $data = [];
-            $data['avatar_questions'] = $this->question->getQuestion(null);
+            $data['avatar_questions'] = $this->question->getQuestions(null);
             $data['pageType'] = 'edit';
             $data['avatar'] = $this->avatar->getAvatar($id);
             $this->load->view('templates/header', ['title' => 'Edit Avatar']);

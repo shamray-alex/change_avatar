@@ -11,44 +11,36 @@ class Avatar extends CI_Model
     {
         $query = $this->db->get_where('avatar', ['id' => $id]);
         $result = $query->result()[0];
-        $result->answer_object = $this->deserializeAnswers($result->answer_object);
+        $result->answer_object = $this->answer->getAnswer('avatar' ,$id);
         return $result;
     }
 
     public function getAllAvatars()
     {
+        $this->load->model('answer');
         $query = $this->db->get('avatar');
         $result = $query->result();
         foreach ($result as $avatar) {
-            $avatar->answer_object = $this->deserializeAnswers($avatar->answer_object);
+            $avatar->answer_object = $this->answer->getAnswer('avatar' ,$avatar->id);
         }
         return $result;
     }
 
-    public function createAvatar($answers)
+    public function createAvatar()
     {
-        $this->db->insert('avatar', ['answer_object' => $this->serializeAnswers($answers), 'updated_at' => time()]);
+        $this->db->insert('avatar', ['created_at'=>time()]);
         return $this->db->insert_id();
     }
 
     public function updateAvatar($id, $answers)
     {
-        return $this->db->update('avatar', ['answer_object' => $this->serializeAnswers($answers)], array('id' => $id));
+        return $this->answer->updateAnswer('avatar', $id, $answers);
     }
 
     public function deleteAvatar($id)
     {
+        $this->answer->deleteAnswer('avatar', $id);
         return $this->db->delete('avatar', array('id' => $id));
-    }
-
-    private function serializeAnswers($answers)
-    {
-        return json_encode($answers);
-    }
-
-    private function deserializeAnswers($answersString)
-    {
-        return json_decode($answersString, true);
     }
 
 }
