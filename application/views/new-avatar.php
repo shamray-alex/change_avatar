@@ -44,7 +44,9 @@
                                             'id' => $id,
                                             'value' => isset($avatar->answer_object[$avatar_questions[$i]->id]) ? $avatar->answer_object[$avatar_questions[$i]->id] : '',
                                             'class' => 'form-control',
-                                            'size' => '100'
+                                            'size' => '100',
+                                            'spellcheck'=>'true',
+                                            'lang'=>'en'
                                         ];
                                         if ($avatar_questions[$i]->id == 1) {
                                             $data['required'] = 'required';

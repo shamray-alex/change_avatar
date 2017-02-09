@@ -96,3 +96,11 @@
 .choose-template-button {
     top: 350px;
 }
+
+pre {
+    border: 0;
+    background-color: transparent;
+    font-family: "Times New Roman", Georgia, Serif;
+    font-size: 18px;
+    color: black;
+}

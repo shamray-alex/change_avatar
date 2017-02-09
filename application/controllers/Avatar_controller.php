@@ -20,10 +20,10 @@ class Avatar_controller extends CI_Controller
     public function index()
     {
         $avatars = $this->avatar->getAllAvatars();
-        $this->load->view('templates/header', ['title' => 'My Avatars']);
-        $this->load->view('templates/topDropdown', ['avatars' => $avatars]);
+        $this->load->view('layouts/header', ['title' => 'My Avatars']);
+        $this->load->view('layouts/topDropdown', ['avatars' => $avatars]);
         $this->load->view('my-avatars', ['avatars' => $avatars]);
-        $this->load->view('templates/footer');
+        $this->load->view('layouts/footer');
     }
 
     public function create_avatar()
@@ -31,10 +31,10 @@ class Avatar_controller extends CI_Controller
         if ($form_data = $this->input->post()) {
             $answers = [];
             foreach ($form_data as $key => $value) {
-                if ($value) {
+//                if ($value) {
                     $questionId = intval(trim($key, 'question_id_'));
                     $answers[$questionId] = $value;
-                }
+//                }
             }
             $newAvatarId = $this->avatar->createAvatar();
             $this->answer->createAnswer('avatar', $newAvatarId, $answers);
@@ -44,10 +44,10 @@ class Avatar_controller extends CI_Controller
             $data = [];
             $data['pageType'] = 'create';
             $data['avatar_questions'] = $this->question->getQuestions(null);
-            $this->load->view('templates/header', ['title' => 'Create Avatar']);
-            $this->load->view('templates/topDropdown', ['avatars' => $this->avatar->getAllAvatars()]);
+            $this->load->view('layouts/header', ['title' => 'Create Avatar']);
+            $this->load->view('layouts/topDropdown', ['avatars' => $this->avatar->getAllAvatars()]);
             $this->load->view('new-avatar', $data);
-            $this->load->view('templates/footer');
+            $this->load->view('layouts/footer');
         }
     }
 
@@ -56,10 +56,10 @@ class Avatar_controller extends CI_Controller
         if ($form_data = $this->input->post()) {
             $answers = [];
             foreach ($form_data as $key => $value) {
-                if ($value) {
+//                if ($value) {
                     $questionId = intval(trim($key, 'question_id_'));
                     $answers[$questionId] = $value;
-                }
+//                }
             }
             $isUpdated = $this->avatar->updateAvatar($id, $answers);
             redirect('/my-avatars');
@@ -68,10 +68,10 @@ class Avatar_controller extends CI_Controller
             $data['avatar_questions'] = $this->question->getQuestions(null);
             $data['pageType'] = 'edit';
             $data['avatar'] = $this->avatar->getAvatar($id);
-            $this->load->view('templates/header', ['title' => 'Edit Avatar']);
-            $this->load->view('templates/topDropdown', ['avatars' => $this->avatar->getAllAvatars()]);
+            $this->load->view('layouts/header', ['title' => 'Edit Avatar']);
+            $this->load->view('layouts/topDropdown', ['avatars' => $this->avatar->getAllAvatars()]);
             $this->load->view('new-avatar', $data);
-            $this->load->view('templates/footer');
+            $this->load->view('layouts/footer');
         }
     }
 

@@ -11,7 +11,7 @@
                     <a href="<?= base_url() ?>index.php/edit-template/<?= $template->id ?>" class="btn btn-default choose-template-button">Choose This Theme</a>
                 </div>
             </div>
-        <? } ?>
+        <?php } ?>
     </div>
 </div>
 
