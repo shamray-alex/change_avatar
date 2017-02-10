@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Template_controller extends CI_Controller {
 
-    private $coockie = null;
+    private $avatarId = null;
 
     public function __construct() {
         parent::__construct();
@@ -13,17 +13,14 @@ class Template_controller extends CI_Controller {
         $this->load->model('template');
         $this->load->model('answer');
         $this->load->model('avatar');
+        $this->load->model('template_headline');
 
         $this->load->helper('url_helper');
         $this->load->helper('form');
         $this->load->helper('cookie');
 
-        $this->coockie = get_cookie('avatarId');
-        if (!$this->coockie) {
-            $avatar = $this->avatar->getFirstAvatar();            
-            $this->coockie = $avatar->id;
-            set_cookie('avatarId', $this->coockie, 2592000);
-        }
+        $this->setAvatarId();
+
     }
 
     public function index() {
@@ -62,19 +59,21 @@ class Template_controller extends CI_Controller {
             return $this->template_questions($id);
         } else {
             $data = [];
+
             $data['answers'] = [];
-            $avatar_answers = $this->answer->getAnswer('avatar', 18);
+            $avatar_answers = $this->answer->getAnswer('avatar', $this->avatarId);
             foreach ($answer as $key => $value) {
                 $data['answers'][$key] = $value;
             }
             foreach ($avatar_answers as $key => $value) {
                 $data['answers'][$key] = $value;
             }
+            $data['headlines']=$this->getHeadlines($id, $data['answers']);
             $template = $this->template->getTemplate($id);
             $info = pathinfo($template->template);
             $fname = $info['filename'];
 
-            $this->load->view('layouts/header', ['title' => 'Template Questionnaire']);
+            $this->load->view('layouts/header', ['title' => 'Preview Template']);
             $this->load->view('layouts/topDropdown', ['avatars' => $this->avatar->getAllAvatars()]);
             $this->load->view('templates/' . $fname, $data);
             $this->load->view('layouts/footer');
@@ -86,8 +85,54 @@ class Template_controller extends CI_Controller {
         if (!count($answer)) {
             return $this->template_questions($id);
         } else {
-            
+            $data = [];
+
+            $data['answers'] = [];
+            $avatar_answers = $this->answer->getAnswer('avatar', $this->avatarId);
+            foreach ($answer as $key => $value) {
+                $data['answers'][$key] = $value;
+            }
+            foreach ($avatar_answers as $key => $value) {
+                $data['answers'][$key] = $value;
+            }
+            $data['headlines']=$this->getHeadlines($id, $data['answers']);
+            $template = $this->template->getTemplate($id);
+            $info = pathinfo($template->template);
+            $fname = $info['filename'];
+
+            $this->load->view('layouts/header', ['title' => 'Preview Template']);
+            $this->load->view('layouts/topDropdown', ['avatars' => $this->avatar->getAllAvatars()]);
+            $this->load->view('templates/' . $fname, $data);
+            $this->load->view('edit-template');
+            $this->load->view('layouts/footer');
         }
+    }
+
+    private function getHeadlines($templateId, $answers){
+        $headlines=$this->template_headline->getHeadlines($templateId);
+        for($i=0; $i<count($headlines);$i++){
+            $matches = [];
+            preg_match_all('/{%([0-9]+)%}/', $headlines[$i], $matches);
+            for($j=0; $j<count($matches[0]);$j++){
+                $headlines[$i]=str_replace($matches[0][$j], $answers[$matches[1][$j]], $headlines[$i]);
+            }
+        }
+        return $headlines;
+    }
+
+    private function setAvatarId(){
+        $post_data = $this->input->post();
+        if(isset($post_data['changeAvatarId'])){
+            $this->avatarId =$post_data['changeAvatarId'];
+        }
+        if (!$this->avatarId) {
+            $this->avatarId = get_cookie('avatarId');
+            if (!$this->avatarId) {
+                $avatar = $this->avatar->getFirstAvatar();
+                $this->avatarId = $avatar->id;
+            }
+        }
+        set_cookie('avatarId', $this->avatarId, 2592000);
     }
 
 }

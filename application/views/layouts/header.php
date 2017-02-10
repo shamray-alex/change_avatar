@@ -9,8 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <style>
         body {
-            /*padding: 60px;*/
-            min-width: 1000px;
+            min-width: 600px;
         }
     </style>
 
@@ -19,6 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link rel="stylesheet" href="<?= base_url() ?>css/mycss.css">
 
     <script src="<?= base_url() ?>js/jquery-3.1.1.min.js"></script>
+    <script src="<?= base_url() ?>js/jquery.cookie.min.js"></script>
     <script src="<?= base_url() ?>js/bootstrap.min.js"></script>
 </head>
 <body>

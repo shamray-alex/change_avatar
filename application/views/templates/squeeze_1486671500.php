@@ -1,7 +1,9 @@
-<div class="container">
+<div class="container" id="template">
 <pre>
 Do you want to <?=$answers[2]?>? Then pay close attention to what you're about to see. Because you're about to...
-"Discover How To <?=$answers[2]?> Without <?=$answers[3]?>..."
+</pre>
+<h2 id="header"><?= $headlines[0] ?></h2>
+    <pre>
 Now it's your turn to <?=$answers[2]?>!
 Get FREE Instant Access To This <?=$answers[2]?> Now...
 Simply enter your name and email below to get started:
@@ -22,4 +24,4 @@ And much, much more!
 To get INSTANT access to these powerful secrets - and many more - simply click the button below,
 enter your email address and I'll send you your copy right away!
 </pre>
-</div>>
+</div>

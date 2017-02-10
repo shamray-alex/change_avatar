@@ -5,6 +5,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Avatar_controller extends CI_Controller
 {
 
+    private $avatarId = null;
+
     public function __construct()
     {
         parent::__construct();
@@ -15,6 +17,9 @@ class Avatar_controller extends CI_Controller
 
         $this->load->helper('url_helper');
         $this->load->helper('form');
+        $this->load->helper('cookie');
+
+        $this->setAvatarId();
     }
 
     public function index()
@@ -81,6 +86,21 @@ class Avatar_controller extends CI_Controller
         }
         $this->avatar->deleteAvatar($id);
         return redirect('/my-avatars');
+    }
+
+    private function setAvatarId(){
+        $post_data = $this->input->post();
+        if(isset($post_data['changeAvatarId'])){
+            $this->avatarId =$post_data['changeAvatarId'];
+        }
+        if (!$this->avatarId) {
+            $this->avatarId = get_cookie('avatarId');
+            if (!$this->avatarId) {
+                $avatar = $this->avatar->getFirstAvatar();
+                $this->avatarId = $avatar->id;
+            }
+        }
+        set_cookie('avatarId', $this->avatarId, 2592000);
     }
 
 }

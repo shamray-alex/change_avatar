@@ -10,7 +10,9 @@ class Template_headline extends CI_Model
     public function getHeadlines($templateId)
     {
         $query = $this->db->get_where('template_headline', ['template_id' => $templateId]);
-        return $query->result();
+        $res=$query->result();
+        $res=json_decode($res[0]->headline, true);
+        return $res;
     }
 
 }
