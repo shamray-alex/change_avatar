@@ -82,18 +82,24 @@
 }
 
 .preview-template-button,
-.choose-template-button {
+.choose-template-button,
+.clear-answers-button{
     position: absolute;
     left: 125px;
     display: none;
     opacity: 0.9;
+    width: 150px;
 }
 
 .preview-template-button {
-    top: 300px;
+    top: 270px;
 }
 
 .choose-template-button {
+    top: 310px;
+}
+
+.clear-answers-button{
     top: 350px;
 }
 
@@ -104,7 +110,19 @@ pre {
     font-size: 18px;
     color: black;
 }
-.template textarea{
+#editableArea textarea{
     width: 1000px;
-    height: ;
+    max-width: 1000px;
+    font-family: "Times New Roman", Georgia, Serif;
+    font-size: 18px;
+    color: black;
+}
+.carousel-content {
+    color:black;
+    display:flex;
+    align-items:center;
+}
+.carousel-control.right,
+.carousel-control.left{
+    background-image: none;
 }

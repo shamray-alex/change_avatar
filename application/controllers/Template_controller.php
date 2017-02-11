@@ -20,7 +20,6 @@ class Template_controller extends CI_Controller {
         $this->load->helper('cookie');
 
         $this->setAvatarId();
-
     }
 
     public function index() {
@@ -68,7 +67,7 @@ class Template_controller extends CI_Controller {
             foreach ($avatar_answers as $key => $value) {
                 $data['answers'][$key] = $value;
             }
-            $data['headlines']=$this->getHeadlines($id, $data['answers']);
+            $data['headlines'] = $this->getHeadlines($id, $data['answers']);
             $template = $this->template->getTemplate($id);
             $info = pathinfo($template->template);
             $fname = $info['filename'];
@@ -95,7 +94,8 @@ class Template_controller extends CI_Controller {
             foreach ($avatar_answers as $key => $value) {
                 $data['answers'][$key] = $value;
             }
-            $data['headlines']=$this->getHeadlines($id, $data['answers']);
+            $headlines = $this->getHeadlines($id, $data['answers']);
+            $data['headlines'] = $headlines;
             $template = $this->template->getTemplate($id);
             $info = pathinfo($template->template);
             $fname = $info['filename'];
@@ -103,27 +103,32 @@ class Template_controller extends CI_Controller {
             $this->load->view('layouts/header', ['title' => 'Preview Template']);
             $this->load->view('layouts/topDropdown', ['avatars' => $this->avatar->getAllAvatars()]);
             $this->load->view('templates/' . $fname, $data);
-            $this->load->view('edit-template');
+            $this->load->view('edit-template', ['headlines'=>$headlines]);
             $this->load->view('layouts/footer');
         }
     }
+    
+    public function clear_template_answers($id){
+        $this->answer->deleteAnswer('template', $id);
+        redirect('/choose-template');
+    }
 
-    private function getHeadlines($templateId, $answers){
-        $headlines=$this->template_headline->getHeadlines($templateId);
-        for($i=0; $i<count($headlines);$i++){
+    private function getHeadlines($templateId, $answers) {
+        $headlines = $this->template_headline->getHeadlines($templateId);
+        for ($i = 0; $i < count($headlines); $i++) {
             $matches = [];
             preg_match_all('/{%([0-9]+)%}/', $headlines[$i], $matches);
-            for($j=0; $j<count($matches[0]);$j++){
-                $headlines[$i]=str_replace($matches[0][$j], $answers[$matches[1][$j]], $headlines[$i]);
+            for ($j = 0; $j < count($matches[0]); $j++) {
+                $headlines[$i] = str_replace($matches[0][$j], $answers[$matches[1][$j]], $headlines[$i]);
             }
         }
         return $headlines;
     }
 
-    private function setAvatarId(){
+    private function setAvatarId() {
         $post_data = $this->input->post();
-        if(isset($post_data['changeAvatarId'])){
-            $this->avatarId =$post_data['changeAvatarId'];
+        if (isset($post_data['changeAvatarId'])) {
+            $this->avatarId = $post_data['changeAvatarId'];
         }
         if (!$this->avatarId) {
             $this->avatarId = get_cookie('avatarId');

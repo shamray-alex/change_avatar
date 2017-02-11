@@ -1,7 +1,9 @@
 <div class="container" id="template">
 <pre>
-Success! Thank you for ordering <?=$answers[7]?>.
-<h2 id="header"><?= $headlines[0] ?></h2>
+Success! Thank you for ordering <?=$answers[7]?>
+</pre>
+<div id="headline"><h2 id="header"><?= $headlines[0] ?></h2></div>
+<pre>
 Because you are serious about <?=$answers[2]?>, I want to offer you something special.
 Other customers who have purchased <?=$answers[7]?> found this to be an even faster shortcut to getting the results they want. Which is why...
 First off, I want to congratulate you for taking action and investing in <?=$answers[7]?>.

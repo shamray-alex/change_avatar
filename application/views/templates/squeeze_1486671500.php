@@ -2,7 +2,7 @@
 <pre>
 Do you want to <?=$answers[2]?>? Then pay close attention to what you're about to see. Because you're about to...
 </pre>
-<h2 id="header"><?= $headlines[0] ?></h2>
+    <div id="headline"><h2 id="header"><?= $headlines[0] ?></h2></div>
     <pre>
 Now it's your turn to <?=$answers[2]?>!
 Get FREE Instant Access To This <?=$answers[2]?> Now...

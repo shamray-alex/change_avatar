@@ -2,10 +2,10 @@
 -- version 4.5.4.1deb2ubuntu2
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Feb 10, 2017 at 05:33 PM
--- Server version: 5.7.17-0ubuntu0.16.04.1
--- PHP Version: 7.0.13-0ubuntu0.16.04.1
+-- Хост: localhost
+-- Время создания: Фев 11 2017 г., 17:54
+-- Версия сервера: 5.7.17-0ubuntu0.16.04.1
+-- Версия PHP: 7.0.13-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `change_avatar`
+-- База данных: `change_avatar`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `answer`
+-- Структура таблицы `answer`
 --
 
 CREATE TABLE `answer` (
@@ -36,12 +36,11 @@ CREATE TABLE `answer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `answer`
+-- Дамп данных таблицы `answer`
 --
 
 INSERT INTO `answer` (`id`, `entity_id`, `entity_type`, `answer_object`, `created_at`, `updated_at`) VALUES
 (3, 18, 'avatar', '{"1":"Webinar","2":"Make more money","3":""}', '2017-02-09 22:32:11', NULL),
-(4, 2, 'template', '{"9":"Spend more time with your partner","10":"Spend more time with your loved ones","11":"Increase your bottom line","12":"Webinar"}', '2017-02-09 22:33:05', NULL),
 (6, 19, 'avatar', '{"1":"Second","2":"grow business","3":"Becoming Overwhelmed"}', '2017-02-10 07:41:58', NULL),
 (7, 20, 'avatar', '[""]', '2017-02-10 15:23:57', NULL),
 (8, 21, 'avatar', '{"1":"Test123","2":"step2","3":"step3"}', '2017-02-10 15:30:31', '2017-02-10 15:30:38'),
@@ -50,7 +49,7 @@ INSERT INTO `answer` (`id`, `entity_id`, `entity_type`, `answer_object`, `create
 -- --------------------------------------------------------
 
 --
--- Table structure for table `avatar`
+-- Структура таблицы `avatar`
 --
 
 CREATE TABLE `avatar` (
@@ -61,7 +60,7 @@ CREATE TABLE `avatar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `avatar`
+-- Дамп данных таблицы `avatar`
 --
 
 INSERT INTO `avatar` (`id`, `answer_object`, `created_at`, `updated_at`) VALUES
@@ -72,7 +71,7 @@ INSERT INTO `avatar` (`id`, `answer_object`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `question`
+-- Структура таблицы `question`
 --
 
 CREATE TABLE `question` (
@@ -83,7 +82,7 @@ CREATE TABLE `question` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `question`
+-- Дамп данных таблицы `question`
 --
 
 INSERT INTO `question` (`id`, `question`, `predefined_answers`, `template_id`) VALUES
@@ -103,7 +102,7 @@ INSERT INTO `question` (`id`, `question`, `predefined_answers`, `template_id`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `template`
+-- Структура таблицы `template`
 --
 
 CREATE TABLE `template` (
@@ -114,7 +113,7 @@ CREATE TABLE `template` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `template`
+-- Дамп данных таблицы `template`
 --
 
 INSERT INTO `template` (`id`, `name`, `template`, `image`) VALUES
@@ -124,7 +123,7 @@ INSERT INTO `template` (`id`, `name`, `template`, `image`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `template_headline`
+-- Структура таблицы `template_headline`
 --
 
 CREATE TABLE `template_headline` (
@@ -134,7 +133,7 @@ CREATE TABLE `template_headline` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `template_headline`
+-- Дамп данных таблицы `template_headline`
 --
 
 INSERT INTO `template_headline` (`id`, `template_id`, `headline`) VALUES
@@ -142,70 +141,70 @@ INSERT INTO `template_headline` (`id`, `template_id`, `headline`) VALUES
 (8, 2, '{"0":"Discover How To {%2%} Without {%3%}...",\r\n"1":"Learn How To {%2%} and Not Worry About {%3%}...",\r\n"2":"Master How To {%2%} Without {%3%}..."}');
 
 --
--- Indexes for dumped tables
+-- Индексы сохранённых таблиц
 --
 
 --
--- Indexes for table `answer`
+-- Индексы таблицы `answer`
 --
 ALTER TABLE `answer`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `avatar`
+-- Индексы таблицы `avatar`
 --
 ALTER TABLE `avatar`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `question`
+-- Индексы таблицы `question`
 --
 ALTER TABLE `question`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `template`
+-- Индексы таблицы `template`
 --
 ALTER TABLE `template`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `template_headline`
+-- Индексы таблицы `template_headline`
 --
 ALTER TABLE `template_headline`
   ADD PRIMARY KEY (`id`),
   ADD KEY `template_id_fk` (`template_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT для сохранённых таблиц
 --
 
 --
--- AUTO_INCREMENT for table `answer`
+-- AUTO_INCREMENT для таблицы `answer`
 --
 ALTER TABLE `answer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
--- AUTO_INCREMENT for table `avatar`
+-- AUTO_INCREMENT для таблицы `avatar`
 --
 ALTER TABLE `avatar`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
--- AUTO_INCREMENT for table `template`
+-- AUTO_INCREMENT для таблицы `template`
 --
 ALTER TABLE `template`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT for table `template_headline`
+-- AUTO_INCREMENT для таблицы `template_headline`
 --
 ALTER TABLE `template_headline`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
--- Constraints for dumped tables
+-- Ограничения внешнего ключа сохраненных таблиц
 --
 
 --
--- Constraints for table `template_headline`
+-- Ограничения внешнего ключа таблицы `template_headline`
 --
 ALTER TABLE `template_headline`
   ADD CONSTRAINT `fk_template_id` FOREIGN KEY (`template_id`) REFERENCES `template` (`id`) ON DELETE CASCADE;
