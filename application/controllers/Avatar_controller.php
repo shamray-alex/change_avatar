@@ -6,6 +6,7 @@ class Avatar_controller extends CI_Controller
 {
 
     private $avatarId = null;
+    private $avatarChanged = false;
 
     public function __construct()
     {
@@ -33,7 +34,7 @@ class Avatar_controller extends CI_Controller
 
     public function create_avatar()
     {
-        if ($form_data = $this->input->post()) {
+        if ($form_data = $this->input->post() && !$this->avatarChanged) {
             $answers = [];
             foreach ($form_data as $key => $value) {
 //                if ($value) {
@@ -58,7 +59,7 @@ class Avatar_controller extends CI_Controller
 
     public function update_avatar_answers($id = null)
     {
-        if ($form_data = $this->input->post()) {
+        if ($form_data = $this->input->post() && !$this->avatarChanged) {
             $answers = [];
             foreach ($form_data as $key => $value) {
 //                if ($value) {
@@ -92,6 +93,7 @@ class Avatar_controller extends CI_Controller
         $post_data = $this->input->post();
         if(isset($post_data['changeAvatarId'])){
             $this->avatarId =$post_data['changeAvatarId'];
+            $this->avatarChanged=true;
         }
         if (!$this->avatarId) {
             $this->avatarId = get_cookie('avatarId');

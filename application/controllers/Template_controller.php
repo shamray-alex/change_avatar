@@ -5,6 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Template_controller extends CI_Controller {
 
     private $avatarId = null;
+    private $avatarChanged = false;
 
     public function __construct() {
         parent::__construct();
@@ -30,7 +31,7 @@ class Template_controller extends CI_Controller {
     }
 
     public function template_questions($id) {
-        if (count($this->input->post())) {
+        if (count($this->input->post() && !$this->avatarChanged)) {
             $form_data = $this->input->post();
             $answers = [];
             foreach ($form_data as $key => $value) {
@@ -129,6 +130,7 @@ class Template_controller extends CI_Controller {
         $post_data = $this->input->post();
         if (isset($post_data['changeAvatarId'])) {
             $this->avatarId = $post_data['changeAvatarId'];
+            $this->avatarChanged=true;
         }
         if (!$this->avatarId) {
             $this->avatarId = get_cookie('avatarId');
