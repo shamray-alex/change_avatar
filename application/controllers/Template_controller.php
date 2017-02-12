@@ -30,7 +30,7 @@ class Template_controller extends CI_Controller {
         $this->load->view('layouts/footer');
     }
 
-    public function template_questions($id) {        
+    public function template_questions($id) {
         if (count($this->input->post()) && !$this->avatarChanged) {
             $form_data = $this->input->post();
             $answers = [];
@@ -81,7 +81,7 @@ class Template_controller extends CI_Controller {
     }
 
     public function edit_template($id) {
-        $answer = $this->answer->getAnswer('template', $id);        
+        $answer = $this->answer->getAnswer('template', $id);
         if (!count($answer)) {
             return $this->template_questions($id);
         } else {
@@ -104,12 +104,12 @@ class Template_controller extends CI_Controller {
             $this->load->view('layouts/header', ['title' => 'Preview Template']);
             $this->load->view('layouts/topDropdown', ['avatars' => $this->avatar->getAllAvatars()]);
             $this->load->view('templates/' . $fname, $data);
-            $this->load->view('edit-template', ['headlines'=>$headlines]);
+            $this->load->view('edit-template', ['headlines' => $headlines]);
             $this->load->view('layouts/footer');
         }
     }
-    
-    public function clear_template_answers($id){
+
+    public function clear_template_answers($id) {
         $this->answer->deleteAnswer('template', $id);
         redirect('/choose-template');
     }
@@ -120,7 +120,8 @@ class Template_controller extends CI_Controller {
             $matches = [];
             preg_match_all('/{%([0-9]+)%}/', $headlines[$i], $matches);
             for ($j = 0; $j < count($matches[0]); $j++) {
-                $headlines[$i] = str_replace($matches[0][$j], $answers[$matches[1][$j]], $headlines[$i]);
+                $ans = isset($answers[$matches[1][$j]]) ? $answers[$matches[1][$j]] : '';
+                $headlines[$i] = str_replace($matches[0][$j], $ans, $headlines[$i]);
             }
         }
         return $headlines;
@@ -130,7 +131,7 @@ class Template_controller extends CI_Controller {
         $post_data = $this->input->post();
         if (isset($post_data['changeAvatarId'])) {
             $this->avatarId = $post_data['changeAvatarId'];
-            $this->avatarChanged=true;
+            $this->avatarChanged = true;
         }
         if (!$this->avatarId) {
             $this->avatarId = get_cookie('avatarId');
