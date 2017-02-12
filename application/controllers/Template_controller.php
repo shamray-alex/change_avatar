@@ -88,7 +88,7 @@ class Template_controller extends CI_Controller {
             $data = [];
 
             $data['answers'] = [];
-            $avatar_answers = $this->answer->getAnswer('avatar', $this->avatarId);
+            $avatar_answers = $this->answer->getAnswer('avatar', $this->avatarId);     
             foreach ($answer as $key => $value) {
                 $data['answers'][$key] = $value;
             }
