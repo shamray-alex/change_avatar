@@ -30,8 +30,8 @@ class Template_controller extends CI_Controller {
         $this->load->view('layouts/footer');
     }
 
-    public function template_questions($id) {
-        if (count($this->input->post() && !$this->avatarChanged)) {
+    public function template_questions($id) {        
+        if (count($this->input->post()) && !$this->avatarChanged) {
             $form_data = $this->input->post();
             $answers = [];
             foreach ($form_data as $key => $value) {
@@ -81,7 +81,7 @@ class Template_controller extends CI_Controller {
     }
 
     public function edit_template($id) {
-        $answer = $this->answer->getAnswer('template', $id);
+        $answer = $this->answer->getAnswer('template', $id);        
         if (!count($answer)) {
             return $this->template_questions($id);
         } else {

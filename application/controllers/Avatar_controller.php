@@ -34,14 +34,15 @@ class Avatar_controller extends CI_Controller
 
     public function create_avatar()
     {
-        if ($form_data = $this->input->post() && !$this->avatarChanged) {
+        $form_data = $this->input->post();       
+        if ($form_data && !$this->avatarChanged) {
             $answers = [];
             foreach ($form_data as $key => $value) {
 //                if ($value) {
                     $questionId = intval(trim($key, 'question_id_'));
                     $answers[$questionId] = $value;
 //                }
-            }
+            }             
             $newAvatarId = $this->avatar->createAvatar();
             $this->answer->createAnswer('avatar', $newAvatarId, $answers);
 
@@ -59,15 +60,16 @@ class Avatar_controller extends CI_Controller
 
     public function update_avatar_answers($id = null)
     {
-        if ($form_data = $this->input->post() && !$this->avatarChanged) {
+        $form_data = $this->input->post();
+        if ($form_data && !$this->avatarChanged) {
             $answers = [];
             foreach ($form_data as $key => $value) {
 //                if ($value) {
                     $questionId = intval(trim($key, 'question_id_'));
                     $answers[$questionId] = $value;
 //                }
-            }
-            $isUpdated = $this->avatar->updateAvatar($id, $answers);
+            }            
+            $isUpdated = $this->answer->updateAnswer('avatar', $id, $answers);
             redirect('/my-avatars');
         } else {
             $data = [];

@@ -34,10 +34,7 @@ class Avatar extends CI_Model {
         return $this->db->insert_id();
     }
 
-    public function updateAvatar($id, $answers) {
-        return $this->answer->updateAnswer('avatar', $id, $answers);
-    }
-
+   
     public function deleteAvatar($id) {
         $this->answer->deleteAnswer('avatar', $id);
         return $this->db->delete('avatar', array('id' => $id));
