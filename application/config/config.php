@@ -24,6 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = 'http://change-avatar/';
+//$config['base_url'] = 'http://162.243.124.146/';
 
 /*
 |--------------------------------------------------------------------------

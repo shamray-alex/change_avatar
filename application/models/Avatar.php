@@ -26,7 +26,7 @@ class Avatar extends CI_Model {
     public function getFirstAvatar() {
         $query = $this->db->get('avatar', 1);
         $res = $query->result();
-        return $res[0];
+        return count($res) ? $res[0] : null;
     }
 
     public function createAvatar() {

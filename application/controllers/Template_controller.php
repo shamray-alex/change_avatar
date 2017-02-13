@@ -137,10 +137,14 @@ class Template_controller extends CI_Controller {
             $this->avatarId = get_cookie('avatarId');
             if (!$this->avatarId) {
                 $avatar = $this->avatar->getFirstAvatar();
-                $this->avatarId = $avatar->id;
+                $this->avatarId = isset($avatar) ? $avatar->id : '';
             }
         }
-        set_cookie('avatarId', $this->avatarId, 2592000);
+        if (!$this->avatarId){
+            redirect('/create-avatar');
+        }else {
+            set_cookie('avatarId', $this->avatarId, 2592000);
+        }
     }
 
 }
