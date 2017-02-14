@@ -9,7 +9,6 @@
                          style="background-image: url(<?= base_url() ?>img/default.png)"></div>
                     <a href="<?= base_url() ?>index.php/preview-template/<?= $template->id ?>" class="btn btn-default preview-template-button">Preview This Theme</a>
                     <a href="<?= base_url() ?>index.php/edit-template/<?= $template->id ?>" class="btn btn-default choose-template-button">Choose This Theme</a>
-                    <a href="<?= base_url() ?>index.php/clear-template-answers/<?= $template->id ?>" class="btn btn-default clear-answers-button">Clear Answers</a>
                 </div>
             </div>
         <?php } ?>

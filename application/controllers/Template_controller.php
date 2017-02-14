@@ -40,7 +40,7 @@ class Template_controller extends CI_Controller {
             }
             $this->answer->createAnswer('template', $id, $answers);
 
-            redirect('/preview-template/' . $id);
+            redirect('/edit-template/' . $id);
         } else {
             $data = [];
             $data['template'] = $this->template->getTemplate($id);

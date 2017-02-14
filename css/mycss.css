@@ -126,3 +126,13 @@ pre {
 .carousel-control.left{
     background-image: none;
 }
+.carousel-control.left{
+    left: 85%;
+}
+.glyphicon-chevron-left:before,
+.glyphicon-chevron-right:before{
+    color: #8c8c8c;
+}
+.carousel-control{
+    width: 5%;
+}
