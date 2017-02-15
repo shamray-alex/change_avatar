@@ -21,5 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="<?= base_url() ?>js/jquery.cookie.min.js"></script>
     <script src="<?= base_url() ?>js/jquery.flexibleArea.js"></script>
     <script src="<?= base_url() ?>js/bootstrap.min.js"></script>
+    <script src="<?= base_url() ?>js/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
+    <script src="<?= base_url() ?>js/tinymce/js/tinymce/tinymce.min.js"></script>
 </head>
 <body>

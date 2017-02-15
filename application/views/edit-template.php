@@ -1,4 +1,4 @@
-<div id="myCarouselTemplate" class="carousel slide" data-ride="carousel" >
+<div id="myCarouselTemplate" class="carousel slide" data-ride="carousel">
     <div class="row">
         <div class="col-xs-offset-2 col-xs-8">
             <div class="carousel-inner" role="listbox">
@@ -9,7 +9,7 @@
                     <div class="item<?= $active ?>">
                         <div class="carousel-content">
                             <div>
-                                <h3><?= $headline ?></h3>                            
+                                <h3><?= $headline ?></h3>
                             </div>
                         </div>
                     </div>
@@ -33,7 +33,20 @@
 
 
 <script>
-    var templates = $('#template pre');
+    tinymce.init({
+        selector: "textarea",
+        menubar: false,
+        width: '100%',
+        plugins: [
+            'advlist autolink lists link image charmap print preview anchor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media contextmenu paste code'
+        ],
+        toolbar: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+        contextmenu: "cut copy paste | link image inserttable | "
+    });
+
+    var templates = $('#template .template-text-for-edit');
     var template = $('#template');
     var container = document.createElement('div');
     container.id = 'editableArea';
@@ -69,7 +82,7 @@
     $('.carousel').carousel({
         interval: false
     });
-    
+
     $("#headline").html('');
     $(".carousel").appendTo("#headline");
 

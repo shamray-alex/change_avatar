@@ -1,9 +1,9 @@
 <div class="container" id="template">
-<p class="template-text-for-edit">
+<textarea>
 Success! Thank you for ordering <?=$answers[7]?>
-</p>
+</textarea>
 <div id="headline"><h2 id="header"><?= $headlines[0] ?></h2></div>
-<p class="template-text-for-edit">
+<textarea>
 Because you are serious about <?=$answers[2]?>, I want to offer you something special.
 Other customers who have purchased <?=$answers[7]?> found this to be an even faster shortcut to getting the results they want. Which is why...
 First off, I want to congratulate you for taking action and investing in <?=$answers[7]?>.
@@ -31,5 +31,5 @@ We have done everything in our power to ensure this upgrade goes seamlessly with
 So if you'd like to:
 <?=$answers[4]?>, <?=$answers[5]?>...and...<?=$answers[6]?>...
 Click the link below to order.
-</p>
+</textarea>
 </div>>
