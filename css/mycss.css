@@ -117,6 +117,9 @@ pre {
     font-size: 18px;
     color: black;
 }
+#template{
+    margin-top: 50px;
+}
 .carousel-content {
     color:black;
     display:flex;
