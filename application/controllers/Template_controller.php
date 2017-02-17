@@ -85,6 +85,7 @@ class Template_controller extends CI_Controller {
         if (!count($answer)) {
             return $this->template_questions($id);
         } else {
+            $this->load->model('synonym');
             $data = [];
 
             $data['answers'] = [];
@@ -100,11 +101,12 @@ class Template_controller extends CI_Controller {
             $template = $this->template->getTemplate($id);
             $info = pathinfo($template->template);
             $fname = $info['filename'];
+            $synonyms=json_encode($this->synonym->getSynonyms());
 
             $this->load->view('layouts/header', ['title' => 'Preview Template']);
             $this->load->view('layouts/topDropdown', ['avatars' => $this->avatar->getAllAvatars()]);
             $this->load->view('templates/' . $fname, $data);
-            $this->load->view('edit-template', ['headlines' => $headlines]);
+            $this->load->view('edit-template', ['headlines' => $headlines, 'synonyms'=>$synonyms]);
             $this->load->view('layouts/footer');
         }
     }

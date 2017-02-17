@@ -139,3 +139,13 @@ pre {
 .carousel-control{
     width: 5%;
 }
+
+#loadingAnimationModal{
+    display: none;
+    width: 75%;
+    position: fixed;
+    left: 50%;
+    margin-left: -37.5%;
+    top: 45%;
+    z-index: 2000;
+}

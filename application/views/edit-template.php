@@ -34,6 +34,7 @@
 
 <script>
     var editorCount = 0;
+    var synonyms=$.parseJSON('<?=$synonyms?>');
 
     //    var templates = $('#template .template-text-for-edit');
     var template = $('#template');
@@ -52,38 +53,39 @@
     //        $(container).append(div);
     //    });
 
-    var templateChildren = template.children();
-    templateChildren.each(function (index) {
-        var el=$(this);
-        if(el.attr('id')!='headline') {
-            container.html(container.html() + el.html());
-        }
-    });
+    var templateChild = $(template.children()[0]);
+    container.html(templateChild.html());
+    var headline = container.find('#headline');
+    //    headline.attr('id', 'headlineTemp').hide();
+    headline.remove();
+    //    templateChildren.each(function (index) {
+    //        var el = $(this);
+    //        if (el.attr('id') != 'headline') {
+    //            container.html(container.html() + el.html());
+    //        }
+    //    });
 
     var textareas = $('#editableArea textarea');
     textareas.each(function () {
         $(this).flexible();
     });
-    textareas.on("input", function (e) {
-        var textarea = $(e.currentTarget);
-        var i = 0;
-        for (i; i < textareas.length; i++) {
-            if ($(textareas[i]).is(textarea)) {
-                break;
-            }
-        }
-        templates[i].innerHTML = textarea.val();
-    });
+
+    //    $('#loadingAnimationModal').modal({backdrop: 'static', keyboard: false});
+    //    $('#loadingAnimationModal').modal('hide');
 
     tinymce.init({
 //        selector: "textarea",
         selector: "#editableArea",
         menubar: false,
         width: '100%',
-        browser_spellcheck : true,
+        browser_spellcheck: true,
         trim_span_elements: false,
         verify_html: false,
-        element_format : 'html',
+        element_format: 'html',
+//        valid_classes: {
+//            'p': 'class4 class5' // Link specific classes
+//        }
+//        valid_elements: '@[id | class]',
         plugins: [
             'advlist autolink lists link image charmap print preview anchor',
             'searchreplace visualblocks code fullscreen',
@@ -94,10 +96,29 @@
 //        contextmenu: "cut copy paste | link image inserttable | ",
         setup: function (editor) {
             editor.on('init', function (a) {
-                console.log('bla-bla');
+                var edi = $('.mce-tinymce.mce-container iframe').contents().find('body');
             });
+            editor.on('input', function (e) {
+                replaceContent(editor);
+            });
+
         },
+        content_css: '<?= base_url() ?>css/bootstrap.min.css',
+        body_class: 'container'
     });
+
+    function replaceContent(editor) {
+        var content = $(editor.getContent());
+        content.each(function () {
+            var el = $(this);
+            if (el.hasClass('before-headline')) {
+                $('#template .before-headline').html(el.html());
+            }
+            if (el.hasClass('after-headline')) {
+                $('#template .after-headline').html(el.html());
+            }
+        })
+    }
 
     $('.carousel').carousel({
         interval: false

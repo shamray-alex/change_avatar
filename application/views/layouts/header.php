@@ -15,6 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <link rel="stylesheet" href="<?= base_url() ?>css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="<?= base_url() ?>css/loading_animation.css">
     <link rel="stylesheet" href="<?= base_url() ?>css/mycss.css">
 
     <script src="<?= base_url() ?>js/jquery-3.1.1.min.js"></script>
