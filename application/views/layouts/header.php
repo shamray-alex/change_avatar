@@ -24,5 +24,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="<?= base_url() ?>js/bootstrap.min.js"></script>
     <script src="<?= base_url() ?>js/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
     <script src="<?= base_url() ?>js/tinymce/js/tinymce/tinymce.min.js"></script>
+    <script src="<?= base_url() ?>js/mark.js/jquery.mark.min.js"></script>
 </head>
 <body>

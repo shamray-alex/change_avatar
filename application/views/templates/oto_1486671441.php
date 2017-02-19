@@ -2,31 +2,31 @@
     <div>
         <div class="before-headline">
         <p>
-            Success! Thank you for ordering <span answerId="7">к</span>
+            Success! Thank you for ordering <span class="avatar-answer" answerId="7">кrrrrrrrrrrrrrrrr</span>
         </p>
             </div>
         <div id="headline"><h2><?= $headlines[0] ?></h2></div>
         <div class="after-headline">
             <p>
-                Because you are serious about <span answerId="2"></span>, I want to offer you something special.
-                Other customers who have purchased <span answerId="7"></span> found this to be an even faster shortcut
+                Because you are serious about <span class="avatar-answer" answerId="2"></span>, I want to offer you something special.
+                Other customers who have purchased <span class="avatar-answer" answerId="7"></span> found this to be an even faster shortcut
                 to getting
                 the results they want. Which is why...</p>
             <p>First off, I want to congratulate you for taking action and investing
-                in <span answerId="7"></span>.</p>
-            <p>Since you decided to purchase <span answerId="7"></span>, you'll be able
-                to <span answerId="2"></span> better than ever before.</p>
+                in <span class="avatar-answer" answerId="7"></span>.</p>
+            <p>Since you decided to purchase <span class="avatar-answer" answerId="7"></span>, you'll be able
+                to <span class="avatar-answer" answerId="2"></span> better than ever before.</p>
             <p>And now that you have this in your arsenal, I want to do something special for
                 you.
-                I want to provide you with another <span answerId="5"></span> that will help you reach the goals you've
+                I want to provide you with another <span class="avatar-answer" answerId="5"></span> that will help you reach the goals you've
                 set for
                 yourself.</p>
-            <p>This <span answerId="5"></span> has actually been of great use to the many people who've got <span
+            <p>This <span class="avatar-answer" answerId="5"></span> has actually been of great use to the many people who've got <span class="avatar-answer"
                     answerId="7"></span> just
                 as you did.
                 It not only helps them reach their goals quicker, but it also gives them a more effective path...a more
                 predictable path to getting there.</p>
-            <p>Announcing <span answerId="7"></span></p>
+            <p>Announcing <span class="avatar-answer" answerId="7"></span></p>
             <p>What <?= $answers[7] ?> does is helps you <?= $answers[2] ?> without <?= $answers[3] ?>.</p>
             <p>Not only that it can also:</p>
             <?= $answers[2] ?>

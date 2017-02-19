@@ -13,5 +13,5 @@ class Synonym extends CI_Model
         $query = $this->db->get('synonym');
         return $query->result();
     }
-
+        
 }

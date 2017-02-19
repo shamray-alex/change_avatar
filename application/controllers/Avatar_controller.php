@@ -53,6 +53,11 @@ class Avatar_controller extends CI_Controller {
         }
     }
 
+//    public function get_avatar() {
+//        $data = $this->input->post('avatarId');
+//        return json_encode(array('response' => $response, 'token' => $new_token));
+//    }
+
     public function update_avatar_answers($id = null) {
         $form_data = $this->input->post();
         if ($form_data && !$this->avatarChanged) {

@@ -1,0 +1,1 @@
+$("#tinymce").mark("dog");

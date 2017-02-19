@@ -80,7 +80,7 @@ class Template_controller extends CI_Controller {
         }
     }
 
-    public function edit_template($id) {
+    public function edit_template($id) {        
         $answer = $this->answer->getAnswer('template', $id);
         if (!count($answer)) {
             return $this->template_questions($id);
