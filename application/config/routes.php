@@ -66,3 +66,7 @@ $route['template-questions/(:num)'] = 'template_controller/template_questions/$1
 $route['preview-template/(:num)'] = 'template_controller/preview_template/$1';
 $route['edit-template/(:num)'] = 'template_controller/edit_template/$1';
 $route['clear-template-answers/(:num)'] = 'template_controller/clear_template_answers/$1';
+
+//PAGES
+$route['pages'] = 'pages_controller/index';
+$route['pages/(:num)'] = 'pages_controller/view/$1';

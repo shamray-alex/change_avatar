@@ -2,13 +2,14 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Avatar_controller extends CI_Controller {
+class Avatar_controller extends CI_Controller
+{
 
     private $avatarId = null;
-    private $avatarChanged = false;
     private $avatarDeleted = false;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
 
         $this->load->model('question');
@@ -22,7 +23,8 @@ class Avatar_controller extends CI_Controller {
         $this->setAvatarId();
     }
 
-    public function index() {
+    public function index()
+    {
         $avatars = $this->avatar->getAllAvatars();
         $this->load->view('layouts/header', ['title' => 'My Avatars']);
         $this->load->view('layouts/topDropdown', ['avatars' => $avatars]);
@@ -30,7 +32,8 @@ class Avatar_controller extends CI_Controller {
         $this->load->view('layouts/footer');
     }
 
-    public function create_avatar() {
+    public function create_avatar()
+    {
         $form_data = $this->input->post();
         if ($form_data && !$this->avatarChanged) {
             $answers = [];
@@ -53,12 +56,8 @@ class Avatar_controller extends CI_Controller {
         }
     }
 
-//    public function get_avatar() {
-//        $data = $this->input->post('avatarId');
-//        return json_encode(array('response' => $response, 'token' => $new_token));
-//    }
-
-    public function update_avatar_answers($id = null) {
+    public function update_avatar_answers($id = null)
+    {
         $form_data = $this->input->post();
         if ($form_data && !$this->avatarChanged) {
             $answers = [];
@@ -80,7 +79,8 @@ class Avatar_controller extends CI_Controller {
         }
     }
 
-    public function deleteAvatar($id) {
+    public function deleteAvatar($id)
+    {
         if (!$id) {
             return redirect('/my-avatars');
         }
@@ -91,12 +91,8 @@ class Avatar_controller extends CI_Controller {
         return redirect('/my-avatars');
     }
 
-    private function setAvatarId() {
-        $post_data = $this->input->post();
-        if (isset($post_data['changeAvatarId'])) {
-            $this->avatarId = $post_data['changeAvatarId'];
-            $this->avatarChanged = true;
-        }
+    private function setAvatarId()
+    {
         if (!$this->avatarId) {
             $this->avatarId = get_cookie('avatarId');
             if (!$this->avatarId || $this->avatarDeleted) {

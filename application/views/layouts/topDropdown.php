@@ -6,7 +6,7 @@
         <ul class="nav navbar-nav">
             <li><a href="<?= base_url() ?>index.php/my-avatars">My Avatars</a></li>
             <li><a href="<?= base_url() ?>index.php/choose-template">Templates</a></li>
-
+            <li><a href="<?= base_url() ?>index.php/pages">My pages</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">

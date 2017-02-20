@@ -15,7 +15,7 @@
                         ?>
                     </ul>
                     <?php
-                    $link = $pageType == 'create' ? 'template-questions/' . $template->id : 'edit-template-questions/' . $template->id;
+                    $link = $pageType == 'create' ? 'edit-template/' . $template->id : 'preview-template/' . $template->id;
                     echo form_open($link)
                     ?>
 

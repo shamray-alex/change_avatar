@@ -30,12 +30,19 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
-
+<div class="container">
+    <div class="pull-right" style="padding: 20px;">
+        <button class="btn btn-success" id="saveButton" style="width: 100px;">Save</button>
+    </div>
+</div>
 
 <script>
     window.editorRef = null;
+    window.editor = null;
+    var currentAvatar = null;
     var editorCount = 0;
     var synonyms = $.parseJSON('<?= $synonyms ?>');
+    var answers = $.parseJSON('<?= $answers ?>');
     var synonymsArr = [];
     for (var s in synonyms) {
         synonymsArr.push(synonyms[s].synonym);
@@ -105,6 +112,7 @@
         setup: function (editor) {
             editor.on('init', function () {
                 window.editorRef = $(editor.editorContainer);
+                window.editor = editor;
                 $(window.editorRef.find('iframe').contents().find('body')).on('contextmenu', function (e) {
                     removeSynonymDropdown();
                     var self = $(e.target);
@@ -115,16 +123,17 @@
 
                         var ul = createSynonymMenu(self.text());
                         $('<div class="dropdown open synonym-dropdown">' + ul + '</div>')
-                                .appendTo("body")
-                                .css({top: e.pageY + "px", left: e.pageX + "px"});
+                            .appendTo("body")
+                            .css({top: e.pageY + "px", left: e.pageX + "px"});
                     }
                 });
-
 
 
                 $(window.editorRef.find('iframe').contents().find('body')).on('click', function () {
                     removeSynonymDropdown();
                 });
+
+                changeAvatar($.cookie('avatarId'));
 
             });
             editor.on('input', function (e) {
@@ -137,9 +146,10 @@
                         marked.each(function () {
                             $(this).replaceWith($(this).html());
                         });
-                        replaceContent(editor);
+                        replaceContent();
 //                        window.editorRef.unmark({"iframes": true, "done": function () {
-                        window.editorRef.mark(synonymsStr, {"element": "span",
+                        window.editorRef.mark(synonymsStr, {
+                            "element": "span",
                             "className": "marked-synonym",
                             "iframes": true,
 //                                    "separateWordSearch": false,
@@ -147,7 +157,8 @@
 //                                    "acrossElements": true,
                             "done": function () {
                                 synonymLock = false;
-                            }});
+                            }
+                        });
 //                            }});
                     }, 1000);
                 }
@@ -166,6 +177,7 @@
         e.preventDefault();
         var text = $(e.target).text();
         $(window.editorRef.find('iframe').contents().find('.opened-context-menu')).text(text);
+        replaceContent();
     });
 
     function removeSynonymDropdown() {
@@ -174,8 +186,8 @@
     }
 
 
-    function replaceContent(editor) {
-        var content = $(editor.getContent());
+    function replaceContent() {
+        var content = $(window.editor.getContent());
         content.each(function () {
             var el = $(this);
             if (el.hasClass('before-headline')) {
@@ -213,13 +225,32 @@
 //        $('#loadingAnimationModal').modal('hide');
         for (var i = 0; i < avatars.length; i++) {
             if (avatars[i].id == avatarId) {
+                currentAvatar = avatars[i];
                 $(window.editorRef.find('iframe').contents().find('.avatar-answer')).each(function () {
-                    $(this).text(avatars[i].answer_object[$(this).attr('answerId')]);
+                    $(this).text(currentAvatar.answer_object[$(this).attr('answerId')]);
                 });
                 break;
             }
         }
+        changeHeadlineByAvatar();
+        replaceContent();
     }
+
+
+    function changeHeadlineByAvatar() {
+        $('#myCarouselTemplate .avatar-answer').each(function () {
+            var id = $(this).attr('answerId');
+            if (answers[id]) {
+                $(this).text(answers[$(this).attr('answerId')]);
+            } else if (currentAvatar.answer_object[id]) {
+                $(this).text(currentAvatar.answer_object[$(this).attr('answerId')]);
+            } else {
+                $(this).text('');
+            }
+
+        });
+    }
+
 
     $('.carousel').carousel({
         interval: false
