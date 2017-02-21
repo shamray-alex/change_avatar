@@ -6,6 +6,7 @@ class Template_controller extends CI_Controller
 {
 
     private $avatarId = null;
+
 //    private $avatarChanged = false;
 
     public function __construct()
@@ -32,7 +33,7 @@ class Template_controller extends CI_Controller
         $this->load->view('layouts/footer');
     }
 
-    public function template_questions($id)
+    public function template_questions($id, $pageType='create')
     {
 //        if (count($this->input->post()) && !$this->avatarChanged) {
 //            $form_data = $this->input->post();
@@ -48,7 +49,7 @@ class Template_controller extends CI_Controller
         $data = [];
         $data['template'] = $this->template->getTemplate($id);
         $data['template_questions'] = $this->question->getQuestions($id);
-        $data['pageType'] = 'create';
+        $data['pageType'] = $pageType;
         $this->load->view('layouts/header', ['title' => 'Template Questionnaire']);
         $this->load->view('layouts/topDropdown', ['avatars' => $this->avatar->getAllAvatars()]);
         $this->load->view('template-questions', $data);
@@ -59,7 +60,7 @@ class Template_controller extends CI_Controller
     public function preview_template($id)
     {
         if (!count($this->input->post())) {
-            return $this->template_questions($id);
+            return $this->template_questions($id, 'preview');
         } else {
             $form_data = $this->input->post();
             $answers = [];
@@ -67,25 +68,23 @@ class Template_controller extends CI_Controller
                 $questionId = intval(trim($key, 'question_id_'));
                 $answers[$questionId] = $value;
             }
-
             $data = [];
-
             $data['answers'] = [];
             $avatar_answers = $this->answer->getAnswer('avatar', $this->avatarId);
+
             foreach ($answers as $key => $value) {
                 $data['answers'][$key] = $value;
             }
             foreach ($avatar_answers as $key => $value) {
                 $data['answers'][$key] = $value;
             }
-            $data['headlines'] = $this->getHeadlines($id, $data['answers']);
             $template = $this->template->getTemplate($id);
             $info = pathinfo($template->template);
             $fname = $info['filename'];
-
             $this->load->view('layouts/header', ['title' => 'Preview Template']);
             $this->load->view('layouts/topDropdown', ['avatars' => $this->avatar->getAllAvatars()]);
             $this->load->view('templates/' . $fname, $data);
+            $this->load->view('layouts/carousel', ['headlines'=>$this->getHeadlines($id)]);
             $this->load->view('layouts/footer');
         }
     }
@@ -103,7 +102,7 @@ class Template_controller extends CI_Controller
             }
             $this->load->model('synonym');
             $answerData = [];
-            $data=[];
+            $data = [];
 
             $answerData['answers'] = [];
             $avatar_answers = $this->answer->getAnswer('avatar', $this->avatarId);
@@ -114,9 +113,7 @@ class Template_controller extends CI_Controller
             foreach ($avatar_answers as $key => $value) {
                 $answerData['answers'][$key] = $value;
             }
-            $headlines = $this->getHeadlines($id);
             $data['answers'] = json_encode($answerData['answers']);
-            $data['headlines'] = $headlines;
             $template = $this->template->getTemplate($id);
             $info = pathinfo($template->template);
             $fname = $info['filename'];
@@ -126,6 +123,7 @@ class Template_controller extends CI_Controller
             $this->load->view('layouts/topDropdown', ['avatars' => $this->avatar->getAllAvatars()]);
             $this->load->view('templates/' . $fname, $answerData);
             $this->load->view('edit-template', $data);
+            $this->load->view('layouts/carousel', ['headlines'=>$this->getHeadlines($id)]);
             $this->load->view('layouts/footer');
         }
     }

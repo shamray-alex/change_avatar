@@ -1,5 +1,4 @@
 <div class="container padding15">
-    <h2 class="text-center">Choose a Page Template</h2>
     <div class="row">
         <?php foreach ($pages as $page) { ?>
             <div class="col-md-4">
