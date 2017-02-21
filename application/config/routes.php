@@ -70,3 +70,4 @@ $route['clear-template-answers/(:num)'] = 'template_controller/clear_template_an
 //PAGES
 $route['pages'] = 'pages_controller/index';
 $route['pages/(:num)'] = 'pages_controller/view/$1';
+$route['save-page'] = 'pages_controller/save';

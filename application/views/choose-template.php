@@ -22,13 +22,13 @@
     $(".template-tile").on('mouseleave', function () {
         $(this).find('a.btn').fadeOut(200);
     });
-    $("a.clear-answers-button").on("click", function (e) {
-        e.preventDefault();
-        var answer = confirm("Are you sure want to continue?")
-        if (answer) {
-            window.location = this.href;
-        } else {
-            return false;
-        }
-    });
+//    $("a.clear-answers-button").on("click", function (e) {
+//        e.preventDefault();
+//        var answer = confirm("Are you sure want to continue?")
+//        if (answer) {
+//            window.location = this.href;
+//        } else {
+//            return false;
+//        }
+//    });
 </script>

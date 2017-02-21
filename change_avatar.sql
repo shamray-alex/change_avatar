@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 20, 2017 at 05:42 PM
+-- Generation Time: Feb 21, 2017 at 03:11 PM
 -- Server version: 5.7.17-0ubuntu0.16.04.1
 -- PHP Version: 7.0.13-0ubuntu0.16.04.1
 
@@ -35,15 +35,6 @@ CREATE TABLE `answer` (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `answer`
---
-
-INSERT INTO `answer` (`id`, `entity_id`, `entity_type`, `answer_object`, `created_at`, `updated_at`) VALUES
-(3, 18, 'avatar', '{"1":"Webinar","2":"Make more money","3":""}', '2017-02-09 22:32:11', NULL),
-(6, 19, 'avatar', '{"1":"Second","2":"","3":"Becoming Overwhelmed"}', '2017-02-10 07:41:58', '2017-02-12 21:49:08'),
-(106, 36, 'avatar', '{"1":"66666666","2":"123456789","3":""}', '2017-02-12 22:18:26', '2017-02-20 13:12:43');
-
 -- --------------------------------------------------------
 
 --
@@ -57,15 +48,6 @@ CREATE TABLE `avatar` (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `avatar`
---
-
-INSERT INTO `avatar` (`id`, `answer_object`, `created_at`, `updated_at`) VALUES
-(18, '', '0000-00-00 00:00:00', NULL),
-(19, '', '0000-00-00 00:00:00', NULL),
-(36, '', '0000-00-00 00:00:00', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -78,6 +60,7 @@ CREATE TABLE `page` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 -- --------------------------------------------------------
 
@@ -356,7 +339,7 @@ ALTER TABLE `template_headline`
 -- AUTO_INCREMENT for table `answer`
 --
 ALTER TABLE `answer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 --
 -- AUTO_INCREMENT for table `avatar`
 --
@@ -366,7 +349,7 @@ ALTER TABLE `avatar`
 -- AUTO_INCREMENT for table `page`
 --
 ALTER TABLE `page`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `synonym`
 --

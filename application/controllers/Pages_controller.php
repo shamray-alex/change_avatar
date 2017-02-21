@@ -25,27 +25,31 @@ class Pages_controller extends CI_Controller
     public function index()
     {
         $avatars = $this->avatar->getAllAvatars();
+        $pages = $this->page->getAllPages();
         $this->load->view('layouts/header', ['title' => 'Pages']);
         $this->load->view('layouts/topDropdown', ['avatars' => $avatars]);
-        $this->load->view('pages', ['avatars' => $avatars, 'pages' => $this->page->getAllPages()]);
+        $this->load->view('pages', ['avatars' => $avatars, 'pages' => $pages]);
         $this->load->view('layouts/footer');
     }
 
     public function view($id)
     {
         $page = $this->page->getPage($id);
-        $data = [];
-        $data['pageType'] = 'create';
-        $data['avatar_questions'] = $this->question->getQuestions(null);
+        $filename = preg_replace('/\\.[^.\\s]{3,4}$/', '', $page->filename);
         $this->load->view('layouts/header', ['title' => 'Page']);
         $this->load->view('layouts/topDropdown', ['avatars' => $this->avatar->getAllAvatars()]);
-        $this->load->view('saved-pages/' . $page->filename);
+        $this->load->view('saved-pages/' . $filename);
         $this->load->view('layouts/footer');
     }
 
     public function save()
     {
-
+        $form_data = $this->input->post();
+        if ($form_data && isset($form_data['pageString'])) {
+            $pageString = $form_data['pageString'];
+            $id = $this->page->savePage($pageString);
+        }
+        redirect('/pages');
     }
 
     private function setAvatarId()

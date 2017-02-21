@@ -6,6 +6,7 @@ class Page extends CI_Model
     public function __construct()
     {
         $this->load->database();
+        $this->load->helper('file');
     }
 
     public function getPage($id)
@@ -18,6 +19,17 @@ class Page extends CI_Model
     {
         $query = $this->db->get('page');
         return $query->result();
+    }
+
+    public function savePage($pageString)
+    {
+        $filename = time() . '.php';
+        $file = FCPATH . 'application/views/saved-pages/' . $filename;
+        if (write_file($file, $pageString, 'w+')) {
+            $this->db->insert('page', ['filename' => $filename]);
+            return $this->db->insert_id();
+        }
+        return null;
     }
 
 }

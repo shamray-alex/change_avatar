@@ -83,7 +83,7 @@
 
 .preview-template-button,
 .choose-template-button,
-.clear-answers-button{
+.preview-page-button{
     position: absolute;
     left: 125px;
     display: none;
@@ -97,6 +97,11 @@
 
 .choose-template-button {
     top: 310px;
+}
+
+
+.preview-page-button {
+    top: 330px;
 }
 
 .clear-answers-button{
